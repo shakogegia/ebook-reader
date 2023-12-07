@@ -1,117 +1,26 @@
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/pages/index.js</code>
+    <main className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}>
+
+      <div className='w-[500px] h-[600px] border border-dashed p-5 rounded-lg font-mono overflow-scroll'>
+        <p className='text-2xl my-2'>Title</p>
+        <p></p>
+        <p>
+          Mijn moeder is zevenenzeventig en woont sinds enkele weken in Autumn Palace. De naam van het bejaardencentrum verwijst naar de herfst omdat de meeste bewoners tot de derde leeftijd behoren. Voor de vierde leeftijd bestaan andere instellingen, die echter ook geen ‘winter’ in hun naam dragen; winter doet aan de dood denken en dat mag niet. Herfst impliceert kleurenrijkdom, levenservaring.
         </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+        <p>
+          In de auto, onderweg naar Autumn Palace, noemde mijn moeder de gedachtegang rond die naamgeving herhaaldelijk hypocriet. Hoewel ze zelf op een verhuizing naar het centrum had aangedrongen, zag ze er nu tegen op en ging ze zelfs zo ver te beweren dat ik haar had gedwongen. Dat was te verwachten. Een aanzienlijkdeel van haar leven bracht mijn moeder door in een roes van furieuze verontwaardiging, zelfmedelijden en een energiek soort doodsdrift. Omdat ze daarnaast ook smaak en gevoel voor humor heeft, soms lief kan zijn en oud is, beet ik op mijn tong en bleef ik mijn aandacht onafgebroken op de weg richten. Ik zou haar niet naar het hoofd slingeren wat dat verblijf me zou kosten. Ze mocht zich geen last voelen, en niet de kans krijgen mij van gierigheid te betichten. 
+        </p>
+        <p>
+          Zelf voelde ik me echter ook opgelaten. Ik moest aan haar vergeetachtigheid van de laatste maanden denken, om er opnieuw van overtuigd te raken dat ze niet zelfstandig kon blijven wonen. Al sinds haar veertigste zei ze symptomen van de ziekte van Alzheimer bij zichzelf te ontdekken, maar sinds kort leken die niet langer voorgewend. Ik had een dozijn beschimmelde ontbijtkoeken en een dode koolmees tussen de wintertruien in haar kleerkast gevonden. Ze had woedend gereageerd toen ik haar erop had gewezen, en met een verward verhaal had ze geprobeerd mijn man als verantwoordelijke aan te wijzen. Ze had hem nooit gemogen, hij haar evenmin. Tijdens mijn volgende bezoek was ze tot mijn verbazing, en opluchting, echter zelf over het bejaardencentrum begonnen.
+        </p>
+        <p>
+          Het kon niet anders. Ik wist het, zij wist het. Wat me vooral ongemakkelijk stemde was dat ik haar nieuwe onderkomen niet vooraf had bezocht, omdat ze aanvankelijk toch enthousiast was geweest en ik het druk had. Ik kende het centrum enkel van een 3D-presentatie op het internet. Het zinnetje: ‘Elke kamer met eigen hulp (AI)’ had zich sindsdien met weerhaakjes in mijn geest verankerd. Omdat ik vermoedde dat het vooruitzicht op een eigen meid mijn moeders voorkeur voor Autumn Palace verklaarde, besloot ik haar niet te vertellen dat die AI volgens mij voor Artificiële Intelligentie stond. Ik had er weleens een documentaire over gezien. Nadat een tekort aan arbeidskrachten de zorgsector een halve eeuw lang stukje bij beetje had uitgehold en een schokkend aantal door verplegend personeel vergeten bejaarden dood op toiletpotten was teruggevonden, had Europa het laatste decennium sterk geïnvesteerd in robots om het werk op te knappen. De nieuwe modellen waren naar verluidt ver verwijderd van de houterige huisdieren en het personeel uit de eerste experimenten. De ouderen zouden er goed op reageren. Het heette een kwestie van gezelschap te zijn.
+        </p>
       </div>
     </main>
   )
