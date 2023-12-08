@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState, Fragment, useMemo, useRef } from 'rea
 import { Button, NextIcon, PrevIcon } from './button'
 import usePageBlocks from '@/hooks/use-page-blocks'
 import useGenerateContentBlocks from '@/hooks/use-generate-content-blocks'
+import Loading from './loading'
 
 // Container dimensions
 const BOX_WIDTH = 500
@@ -129,9 +130,23 @@ const Content = ({ contentBlocks, opacity, onPageBreak }) => {
   )
 }
 
+function ContentWrapper({ children, opacity = 1 }) {
+  return (
+    <div className="w-full relative break-normal" style={{ opacity }}>
+      {children}
+    </div>
+  )
+}
+
+function Line({ heading, children }) {
+  return <p className={heading ? 'text-3xl text-center mb-8' : ''}>{children}</p>
+}
+
 function Word({ children, lineIndex, wordIndex, onPageBreak }) {
   const ref = useRef(null)
 
+  // Check if the word is the first word of the new line
+  // If so, call the onPageBreak callback
   useEffect(() => {
     if (ref.current && onPageBreak) {
       const { offsetLeft, offsetTop, offsetHeight } = ref.current
@@ -151,25 +166,4 @@ function Word({ children, lineIndex, wordIndex, onPageBreak }) {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return <span ref={ref}>{children}</span>
-}
-
-function Line({ heading, children }) {
-  return <p className={heading ? 'text-3xl text-center mb-8' : ''}>{children}</p>
-}
-
-function ContentWrapper({ children, opacity = 1 }) {
-  return (
-    <div className="w-full relative break-normal" style={{ opacity }}>
-      {children}
-    </div>
-  )
-}
-
-function Loading() {
-  return (
-    <div className="absolute inset-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
-      {' '}
-      Loading...{' '}
-    </div>
-  )
 }
