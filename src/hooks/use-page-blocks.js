@@ -5,7 +5,7 @@ export default function usePageBlocks() {
     const [startBlockIndex, startWordIndex] = start.split('-').map(Number)
     const [endBlockIndex, endWordIndex] = end?.split('-').map(Number) || [
       contentBlocks.length - 1,
-      contentBlocks[contentBlocks.length - 1].words.length - 1,
+      contentBlocks[contentBlocks.length - 1].words.length,
     ]
 
     // Filter the array
