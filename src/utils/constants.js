@@ -1,4 +1,4 @@
-export const content = `# 
+export const input = `# 
 
 Prins
 
