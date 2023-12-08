@@ -2,25 +2,25 @@ import { useCallback } from 'react'
 
 export default function usePageBlocks() {
   const getPageBlocksByBreakPoint = useCallback((contentBlocks, start, end) => {
-    const [startLineIndex, startWordIndex] = start.split('-').map(Number)
-    const [endLineIndex, endWordIndex] = end?.split('-').map(Number) || [
+    const [startBlockIndex, startWordIndex] = start.split('-').map(Number)
+    const [endBlockIndex, endWordIndex] = end?.split('-').map(Number) || [
       contentBlocks.length - 1,
       contentBlocks[contentBlocks.length - 1].words.length - 1,
     ]
 
     // Filter the array
-    return contentBlocks.reduce((acc, curr, lineIndex) => {
+    return contentBlocks.reduce((acc, curr, blockIndex) => {
       // Check if the current line is within the range
-      if (lineIndex >= startLineIndex && lineIndex <= endLineIndex) {
+      if (blockIndex >= startBlockIndex && blockIndex <= endBlockIndex) {
         let words
 
-        if (lineIndex === startLineIndex && lineIndex === endLineIndex) {
+        if (blockIndex === startBlockIndex && blockIndex === endBlockIndex) {
           // If the start and end lines are the same
           words = curr.words.slice(startWordIndex, endWordIndex + 1)
-        } else if (lineIndex === startLineIndex) {
+        } else if (blockIndex === startBlockIndex) {
           // If it's the start line
           words = curr.words.slice(startWordIndex)
-        } else if (lineIndex === endLineIndex) {
+        } else if (blockIndex === endBlockIndex) {
           // If it's the end line
           words = curr.words.slice(0, endWordIndex)
         } else {

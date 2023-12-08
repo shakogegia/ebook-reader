@@ -43,9 +43,9 @@ export default function Reader({ input }) {
     }
   }, [currenPageIndex, isReady, breakPoints, sortedBreakPoints, contentBlocks, getPageBlocksByBreakPoint])
 
-  const onPageBreak = useCallback(({ lineIndex, wordIndex }) => {
+  const onPageBreak = useCallback(({ blokIndex, wordIndex }) => {
     setBreakPoints((prevState) => {
-      const pageBreak = `${lineIndex}-${wordIndex}`
+      const pageBreak = `${blokIndex}-${wordIndex}`
       if (prevState.includes(pageBreak)) return prevState
       return [...prevState, pageBreak]
     })
@@ -108,21 +108,21 @@ export default function Reader({ input }) {
 const Content = ({ contentBlocks, opacity, onPageBreak }) => {
   return (
     <ContentWrapper opacity={opacity}>
-      {contentBlocks.map((line, lineIndex) => {
+      {contentBlocks.map((block, blokIndex) => {
         return (
-          <div key={`line-${lineIndex}`}>
-            <Line heading={line.style === 'heading'}>
-              {line.words.map((word, wordIndex) => (
-                <Fragment key={`word-${lineIndex + wordIndex}`}>
-                  <Word lineIndex={lineIndex} wordIndex={wordIndex} onPageBreak={onPageBreak}>
+          <div key={`block-${blokIndex}`}>
+            <Block heading={block.style === 'heading'}>
+              {block.words.map((word, wordIndex) => (
+                <Fragment key={`word-${blokIndex + wordIndex}`}>
+                  <Word blokIndex={blokIndex} wordIndex={wordIndex} onPageBreak={onPageBreak}>
                     {word}
                   </Word>
 
                   {/* Draw empty space between words, if not last word */}
-                  {line.words[wordIndex + 1] && ' '}
+                  {block.words[wordIndex + 1] && ' '}
                 </Fragment>
               ))}
-            </Line>
+            </Block>
           </div>
         )
       })}
@@ -138,11 +138,11 @@ function ContentWrapper({ children, opacity = 1 }) {
   )
 }
 
-function Line({ heading, children }) {
+function Block({ heading, children }) {
   return <p className={heading ? 'text-3xl text-center mb-8' : ''}>{children}</p>
 }
 
-function Word({ children, lineIndex, wordIndex, onPageBreak }) {
+function Word({ children, blokIndex, wordIndex, onPageBreak }) {
   const ref = useRef(null)
 
   // Check if the word is the first word of the new line
@@ -150,7 +150,7 @@ function Word({ children, lineIndex, wordIndex, onPageBreak }) {
   useEffect(() => {
     if (ref.current && onPageBreak) {
       const { offsetLeft, offsetTop, offsetHeight } = ref.current
-      const isFirstWord = lineIndex === 0 && wordIndex === 0
+      const isFirstWord = blokIndex === 0 && wordIndex === 0
       const pageSequence = parseInt(offsetTop / VIEWPORT_HEIGHT) + 1
       const pageBottomPoint = pageSequence * VIEWPORT_HEIGHT
       const wordBottomPoint = offsetTop + offsetHeight
@@ -160,7 +160,7 @@ function Word({ children, lineIndex, wordIndex, onPageBreak }) {
         (wordBottomPoint > pageBottomPoint || pageBottomPoint - wordBottomPoint <= 5)
 
       if (isFirstWord || isOnNewLine) {
-        onPageBreak({ lineIndex, wordIndex })
+        onPageBreak({ blokIndex, wordIndex })
       }
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
