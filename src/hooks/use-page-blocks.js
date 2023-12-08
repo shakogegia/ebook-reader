@@ -4,8 +4,8 @@ export default function usePageBlocks() {
   const getPageBlocksByBreakPoint = useCallback((contentBlocks, start, end) => {
     const [startLineIndex, startWordIndex] = start.split('-').map(Number)
     const [endLineIndex, endWordIndex] = end?.split('-').map(Number) || [
-      content.length - 1,
-      content[content.length - 1].words.length - 1,
+      contentBlocks.length - 1,
+      contentBlocks[contentBlocks.length - 1].words.length - 1,
     ]
 
     // Filter the array

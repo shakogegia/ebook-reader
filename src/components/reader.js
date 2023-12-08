@@ -76,50 +76,19 @@ export default function Reader({ input }) {
         >
           {!isReady && <Loading />}
 
-          {!isReady && (
-            <ContentWrapper opacity={0}>
-              {contentBlocks.map((line, lineIndex) => {
-                return (
-                  <Line key={`line-${lineIndex}`} heading={line.style === 'heading'}>
-                    {line.words.map((word, wordIndex) => (
-                      <Fragment key={`word-${lineIndex + wordIndex}`}>
-                        <Word lineIndex={lineIndex} wordIndex={wordIndex} onPageBreak={onPageBreak}>
-                          {word}
-                        </Word>
+          {/*
+             First render whole content with opacity 0,
+             to get break points and calculate pages
+          */}
+          {!isReady && <Content contentBlocks={contentBlocks} opacity={0} onPageBreak={onPageBreak} />}
 
-                        {/* Draw empty space between words, if not last word */}
-                        {line.words[wordIndex + 1] && ' '}
-                      </Fragment>
-                    ))}
-                  </Line>
-                )
-              })}
-            </ContentWrapper>
-          )}
-
-          {isReady && (
-            <ContentWrapper opacity={1}>
-              {currenPageBlocks.map((line, lineIndex) => {
-                return (
-                  <div key={`line-${lineIndex}`}>
-                    <Line heading={line.style === 'heading'}>
-                      {line.words.map((word, wordIndex) => (
-                        <Fragment key={`word-${lineIndex + wordIndex}`}>
-                          <span>{word}</span>
-
-                          {/* Draw empty space between words, if not last word */}
-                          {line.words[wordIndex + 1] && ' '}
-                        </Fragment>
-                      ))}
-                    </Line>
-                  </div>
-                )
-              })}
-            </ContentWrapper>
-          )}
+          {/* 
+            After we have calculated the breakpoints, render the content again
+            with opacity 1 and only the current page
+           */}
+          {isReady && <Content contentBlocks={currenPageBlocks} opacity={1} />}
         </div>
 
-        {/* Pagination  */}
         <div className="text-center">
           <span>
             Page {currenPageIndex + 1} of {sortedBreakPoints.length}
@@ -135,11 +104,36 @@ export default function Reader({ input }) {
   )
 }
 
+const Content = ({ contentBlocks, opacity, onPageBreak }) => {
+  return (
+    <ContentWrapper opacity={opacity}>
+      {contentBlocks.map((line, lineIndex) => {
+        return (
+          <div key={`line-${lineIndex}`}>
+            <Line heading={line.style === 'heading'}>
+              {line.words.map((word, wordIndex) => (
+                <Fragment key={`word-${lineIndex + wordIndex}`}>
+                  <Word lineIndex={lineIndex} wordIndex={wordIndex} onPageBreak={onPageBreak}>
+                    {word}
+                  </Word>
+
+                  {/* Draw empty space between words, if not last word */}
+                  {line.words[wordIndex + 1] && ' '}
+                </Fragment>
+              ))}
+            </Line>
+          </div>
+        )
+      })}
+    </ContentWrapper>
+  )
+}
+
 function Word({ children, lineIndex, wordIndex, onPageBreak }) {
   const ref = useRef(null)
 
   useEffect(() => {
-    if (ref.current) {
+    if (ref.current && onPageBreak) {
       const { offsetLeft, offsetTop, offsetHeight } = ref.current
       const isFirstWord = lineIndex === 0 && wordIndex === 0
       const pageSequence = parseInt(offsetTop / VIEWPORT_HEIGHT) + 1
